@@ -1,0 +1,39 @@
+{
+  "name": "kstr",
+  "version": "0.1.0",
+  "description": "string utilities",
+  "main": "js/kstr.js",
+  "files": [
+    "js/kstr.js",
+    "js/ansi.js"
+  ],
+  "scripts": {
+    "test": "./node_modules/.bin/mocha -c --require koffee/js/register ./coffee/test.coffee",
+    "watch": "./node_modules/.bin/onchange coffee/test.coffee coffee/kstr.coffee -- npm run test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ttps://github.com/monsterkodi/kstr.git"
+  },
+  "keywords": [
+    "string",
+    "utilities"
+  ],
+  "author": "monsterkodi",
+  "license": "Unlicense",
+  "bugs": {
+    "url": "https://github.com/monsterkodi/kstr/issues"
+  },
+  "dependencies": {
+    "html-entities": "^1.2.1",
+    "lodash.pull": "^4.1.0",
+    "noon": ">=2.10.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "klor": "^0.56.0",
+    "koffee": ">=0.56.0",
+    "mocha": "^6.1.4",
+    "onchange": "^6.0.0"
+  }
+}

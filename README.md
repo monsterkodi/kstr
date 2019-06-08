@@ -1,2 +1,0 @@
-# kstr
-string utilities
