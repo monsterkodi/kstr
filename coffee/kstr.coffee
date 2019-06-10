@@ -74,11 +74,12 @@ str.detab = (s) ->
 
 str.time = (t) ->
     if typeof(t) == 'bigint'
-        f = 1000n 
+        thsnd = BigInt 1000
+        f = thsnd
         for u in ['ns''μs''ms''s'] 
             if u == 's' or t < f 
-                return '' + (1000n * t / f) + u 
-            f *= 1000n    
+                return '' + (thsnd * t / f) + u 
+            f *= thsnd
     else
         String t
         

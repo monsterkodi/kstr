@@ -14,4 +14,4 @@ A small collection of string utilities
 [david-image]:https://david-dm.org/monsterkodi/kstr/status.svg
 [david-url]:https://david-dm.org/monsterkodi/kstr
 [downloads-image]:https://img.shields.io/npm/dm/kstr.svg
-[downloads-url]:http://npmjs.org/package/kstr
+[downloads-url]:https://www.npmtrends.com/kstr
