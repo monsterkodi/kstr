@@ -1,6 +1,6 @@
 {
   "name": "kstr",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "string utilities",
   "main": "js/kstr.js",
   "files": [
@@ -27,12 +27,12 @@
   "dependencies": {
     "html-entities": "^1.2.1",
     "lodash.pull": "^4.1.0",
-    "noon": ">=2.10.0"
+    "noon": "^2.13.0"
   },
   "devDependencies": {
     "chai": "^4.2.0",
-    "klor": ">=0.56.0",
-    "koffee": ">=0.56.0",
+    "klor": "^1.0.1",
+    "koffee": "^1.0.0",
     "mocha": "^6.1.4",
     "onchange": "^6.0.0"
   }
