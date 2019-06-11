@@ -1,5 +1,5 @@
 name            kstr
-version         0.4.0
+version         0.5.0
 description     string utilities
 main            js/kstr.js
 files
@@ -10,7 +10,8 @@ scripts
                 watch   ./node_modules/.bin/onchange coffee/test.coffee coffee/kstr.coffee -- npm run test
 repository
                 type  git
-                url   ttps://github.com/monsterkodi/kstr.git
+                url   https://github.com/monsterkodi/kstr.git
+homepage        https://npmjs.com/package/kstr
 keywords
                 string
                 utilities

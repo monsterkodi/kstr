@@ -1,6 +1,6 @@
 {
   "name": "kstr",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "string utilities",
   "main": "js/kstr.js",
   "files": [
@@ -13,8 +13,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "ttps://github.com/monsterkodi/kstr.git"
+    "url": "https://github.com/monsterkodi/kstr.git"
   },
+  "homepage": "https://npmjs.com/package/kstr",
   "keywords": [
     "string",
     "utilities"
