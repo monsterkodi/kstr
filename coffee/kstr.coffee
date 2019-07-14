@@ -47,14 +47,14 @@ str.escapeRegexp = (s) ->
 # 000        000   000  000   000  
 # 000        000   000  0000000    
 
-str.lpad = (s, l) ->
+str.lpad = (s, l, c=' ') ->
     s = String s
-    while s.length < l then s = ' ' + s
+    while s.length < l then s = c + s
     s
 
-str.rpad = (s, l) ->
+str.rpad = (s, l, c=' ') ->
     s = String s
-    while s.length < l then s += ' '
+    while s.length < l then s += c
     s
     
 str.detab = (s) ->
