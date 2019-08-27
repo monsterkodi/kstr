@@ -33,7 +33,7 @@
   "devDependencies": {
     "chai": "^4.2.0",
     "klor": "^1.4.0",
-    "koffee": "^1.3.0",
+    "koffee": "^1.4.0",
     "mocha": "^6.2.0",
     "onchange": "^6.0.0"
   }
