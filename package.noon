@@ -1,5 +1,5 @@
 name            kstr
-version         0.6.0
+version         0.7.0
 description     string utilities
 main            js/kstr.js
 files

@@ -96,5 +96,7 @@ str.stripAnsi = (s) ->
 str.ansi2html = (s) ->
     Ansi = require './ansi'
     Ansi.html s
+    
+str.ansi = require './ansi'
         
 module.exports = str
