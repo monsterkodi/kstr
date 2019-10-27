@@ -118,7 +118,8 @@ class Ansi
         addText = (t) =>
             @text += t
             txt = @text.slice start
-            match = txt.trim()
+            txt = txt.trim() if not bg.length and not fg.length
+            match = txt
             if match.length
                 style = ''
                 style += fg + ';'    if fg.length
@@ -126,7 +127,7 @@ class Ansi
                 style += st.join ';' if st.length
                 @diss.push
                     match: match
-                    start: start + txt.search /[^\s]/
+                    start: start #+ txt.search /[^\s]/
                     styl:  style
             start = @text.length
             ''

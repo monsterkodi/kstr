@@ -11,7 +11,7 @@ chai = require 'chai'
 chai.should()
 expect = chai.expect
 
-describe 'kstr', ->
+describe 'kstr' ->
                     
     it 'escapeRegexp' ->
         kstr.escapeRegexp('a/b.txt').should.eql 'a\\/b\\.txt'
@@ -57,6 +57,15 @@ describe 'kstr', ->
     it 'stripAnsi' ->
         
         (kstr.stripAnsi g5('green')).should.eql 'green'
+        
+    it 'dissect' ->
+        
+        ansi= new kstr.ansi
+        diss = ansi.dissect '[48;5;0m..[48;5;15m  [0m'
+        diss[0].should.eql '..  '
+        diss[1].length.should.eql 2
+        diss[1][1].match.should.eql '  '
+        diss[1][1].start.should.eql 2
         
     # 000000000   0000000   0000000    
     #    000     000   000  000   000  
