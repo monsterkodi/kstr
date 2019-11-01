@@ -116,19 +116,48 @@ class Ansi
         delStyle = (style) -> pull st, style
         
         addText = (t) =>
+            
+            start = @text.length
+            
+            match = ''
+            mstrt = start
+            
+            space = ''
+            sstrt = start
+
+            addMatch = =>
+                if match.length
+                    style = ''
+                    style += fg + ';'    if fg.length
+                    style += bg + ';'    if bg.length
+                    style += st.join ';' if st.length
+                    @diss.push
+                        match: match
+                        start: mstrt
+                        styl:  style
+                    match = ''
+            
+            addSpace = =>
+                if space.length
+                    @diss.push
+                        match: space
+                        start: sstrt
+                        styl:  bg + ';'
+                    space = ''
+                    
+            for i in [0...t.length]
+                if t[i] != ' '
+                    mstrt = start+i if match == ''
+                    match += t[i]
+                    addSpace()
+                else
+                    if bg.length
+                        sstrt = start+i if space == ''
+                        space += t[i]
+                    addMatch()
+            addMatch()            
+            addSpace()            
             @text += t
-            txt = @text.slice start
-            txt = txt.trim() if not bg.length and not fg.length
-            match = txt
-            if match.length
-                style = ''
-                style += fg + ';'    if fg.length
-                style += bg + ';'    if bg.length
-                style += st.join ';' if st.length
-                @diss.push
-                    match: match
-                    start: start #+ txt.search /[^\s]/
-                    styl:  style
             start = @text.length
             ''
         
