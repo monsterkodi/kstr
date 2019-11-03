@@ -16,6 +16,37 @@ describe 'kstr' ->
     it 'escapeRegexp' ->
         kstr.escapeRegexp('a/b.txt').should.eql 'a\\/b\\.txt'
         
+    #  0000000  000000000  00000000   000  00000000   
+    # 000          000     000   000  000  000   000  
+    # 0000000      000     0000000    000  00000000   
+    #      000     000     000   000  000  000        
+    # 0000000      000     000   000  000  000        
+    
+    it 'lstrip' ->
+        kstr.lstrip().should.eql ''
+        kstr.lstrip('').should.eql ''
+        kstr.lstrip('   y').should.eql 'y'
+        kstr.lstrip(' ').should.eql ''
+        kstr.lstrip('x ' 'x').should.eql ' '
+        kstr.lstrip(' yxy ' ' y').should.eql 'xy '
+
+    it 'rstrip' ->
+        kstr.rstrip().should.eql ''
+        kstr.rstrip('').should.eql ''
+        kstr.rstrip('   y' 'y').should.eql '   '
+        kstr.rstrip(' ').should.eql ''
+        kstr.rstrip(' x' 'x').should.eql ' '
+        kstr.rstrip(' yxy ' ' y').should.eql ' yx'
+
+    it 'strip' ->
+        kstr.strip().should.eql ''
+        kstr.strip('').should.eql ''
+        kstr.strip('abc').should.eql 'abc'
+        kstr.strip('123   y  123' '123').should.eql '   y  '
+        kstr.strip(' x y z ' 'xyz ').should.eql ''
+        kstr.strip('x x' 'x').should.eql ' '
+        kstr.strip(' yxy ' ' y').should.eql 'x'
+        
     # 00000000    0000000   0000000    
     # 000   000  000   000  000   000  
     # 00000000   000000000  000   000  

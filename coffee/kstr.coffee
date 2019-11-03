@@ -38,9 +38,32 @@ str.encode = (s, spaces=true) ->
         ''
   
 ESCAPEREGEXP = /[-\\^$*+?.()|[\]{}\/]/g
+
 str.escapeRegexp = (s) ->
+    
     s.replace ESCAPEREGEXP, '\\$&'
-                
+           
+#  0000000  000000000  00000000   000  00000000   
+# 000          000     000   000  000  000   000  
+# 0000000      000     0000000    000  00000000   
+#      000     000     000   000  000  000        
+# 0000000      000     000   000  000  000        
+
+
+str.rstrip = (s, cs=' ') ->
+    
+    s ?= ''
+    s = s[0...s.length-1] while s[-1] in cs
+    s
+
+str.lstrip = (s, cs=' ') ->
+    
+    s ?= ''
+    s = s[1..] while s[0] in cs
+    s
+            
+str.strip = (s, cs=' ') -> str.rstrip str.lstrip(s,cs), cs
+    
 # 00000000    0000000   0000000    
 # 000   000  000   000  000   000  
 # 00000000   000000000  000   000  
