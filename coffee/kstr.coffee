@@ -80,6 +80,8 @@ str.rpad = (s, l, c=' ') ->
     while s.length < l then s += c
     s
     
+str.pad = str.rpad
+
 str.detab = (s) ->
     s = String s
     i = 0
