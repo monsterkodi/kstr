@@ -108,4 +108,37 @@ describe 'kstr' ->
         kstr.detab('\t\t').should.eql '        '
         kstr.detab('aa\tbb').should.eql 'aa  bb'
         
+       
+    # 000000000  000  00     00  00000000  
+    #    000     000  000   000  000       
+    #    000     000  000000000  0000000   
+    #    000     000  000 0 000  000       
+    #    000     000  000   000  00000000  
+    
+    it 'time number' ->
+        kstr.time(1                     ).should.eql '1 ms'
+        kstr.time(1000                  ).should.eql '1 second'
+        kstr.time(1001                  ).should.eql '1 second'
+        kstr.time(1999                  ).should.eql '1 second'
+        kstr.time(2000                  ).should.eql '2 seconds'
+        kstr.time(2001                  ).should.eql '2 seconds'
+        kstr.time(59999                 ).should.eql '59 seconds'
+        kstr.time(60000                 ).should.eql '1 minute'
+        kstr.time(120001                ).should.eql '2 minutes'
+        kstr.time(1000*60*60            ).should.eql '1 hour'
+        kstr.time(1000*60*60*24         ).should.eql '1 day'
+        kstr.time(1000*60*60*48         ).should.eql '2 days'
+        kstr.time(1000*60*60*24*30      ).should.eql '1 month'
+        kstr.time(1000*60*60*24*60      ).should.eql '2 months'
+        kstr.time(1000*60*60*24*30*12   ).should.eql '1 year'
+        kstr.time(1000*60*60*24*30*24   ).should.eql '2 years'
+        
+    it 'time bigint' ->
+        kstr.time(BigInt 1   ).should.eql '1 ns'
+        kstr.time(BigInt 1000).should.eql '1 μs'
+        kstr.time(BigInt 1001).should.eql '1 μs'
+        kstr.time(BigInt 6001).should.eql '6 μs'
+        kstr.time(BigInt 1000000).should.eql '1 ms'
+        kstr.time(BigInt 1000000000).should.eql '1 second'
+        kstr.time(BigInt 2000000000).should.eql '2 seconds'
         

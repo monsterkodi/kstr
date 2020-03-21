@@ -87,7 +87,7 @@ str.detab = (s) ->
     i = 0
     while i < s.length
         if s[i] == '\t'
-            s = s[...i] + (str.lpad '', 4-(i%4)) + s[i+1..]
+            s = s[...i] + (str.lpad '' 4-(i%4)) + s[i+1..]
         i += 1
     s
     
@@ -98,15 +98,34 @@ str.detab = (s) ->
 #    000     000  000   000  00000000  
 
 str.time = (t) ->
-    if typeof(t) == 'bigint'
-        thsnd = BigInt 1000
-        f = thsnd
-        for u in ['ns''μs''ms''s'] 
-            if u == 's' or t < f 
-                return '' + (thsnd * t / f) + u 
-            f *= thsnd
-    else
-        String t
+    switch typeof t 
+        when 'number'
+            f = 1
+            o = 
+                ms:     1000
+                second: 60
+                minute: 60
+                hour:   24
+                day:    30
+                month:  12
+                year:   0
+            for k in Object.keys o
+                num = parseInt t/f
+                f *= o[k]
+                if k == 'year' or t < f
+                    k += 's' if k != 'ms' and num != 1
+                    return '' + num + ' ' + k
+        when 'bigint'
+            thsnd = BigInt 1000
+            f = thsnd
+            for k in ['ns' 'μs' 'ms' 'second'] 
+                if k == 'seconds' or t < f 
+                    num = parseInt thsnd * t / f
+                    k += 's' if k == 'second' and num != 1
+                    return '' + num + ' ' + k
+                f *= thsnd
+        else
+            String t
         
 #  0000000   000   000   0000000  000  
 # 000   000  0000  000  000       000  
@@ -116,7 +135,7 @@ str.time = (t) ->
 
 STRIPANSI = /\x1B[[(?);]{0,2}(;?\d)*./g
 str.stripAnsi = (s) ->
-    s.replace STRIPANSI, ''
+    s.replace? STRIPANSI, ''
         
 str.ansi2html = (s) ->
     Ansi = require './ansi'
