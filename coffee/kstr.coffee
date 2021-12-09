@@ -63,6 +63,31 @@ str.lstrip = (s, cs=' ') ->
     s
             
 str.strip = (s, cs=' ') -> str.rstrip str.lstrip(s,cs), cs
+
+# 000000000  00000000   000  00     00  
+#    000     000   000  000  000   000  
+#    000     0000000    000  000000000  
+#    000     000   000  000  000 0 000  
+#    000     000   000  000  000   000  
+
+str.trim  = str.strip
+str.ltrim = str.lstrip
+str.rtrim = str.rstrip
+
+#  0000000  000   000  000000000  
+# 000       0000  000     000     
+# 000       000 0 000     000     
+# 000       000  0000     000     
+#  0000000  000   000     000     
+
+str.lcnt = (s, c) ->
+    s ?= ''
+    if typeof s == 'number' and Number.isFinite s then s = String s
+    return 0 if typeof s != 'string'
+    c ?= ''
+    i = -1
+    while s[++i] in c then
+    i    
     
 # 00000000    0000000   0000000    
 # 000   000  000   000  000   000  

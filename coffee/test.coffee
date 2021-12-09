@@ -46,7 +46,42 @@ describe 'kstr' ->
         kstr.strip(' x y z ' 'xyz ').should.eql ''
         kstr.strip('x x' 'x').should.eql ' '
         kstr.strip(' yxy ' ' y').should.eql 'x'
+
+    it 'trim' ->
+        kstr.trim('123   y  123' '123').should.eql '   y  '
+        kstr.ltrim(' yxy ' ' y').should.eql 'xy '
+        kstr.rtrim('   y' 'y').should.eql '   '
         
+    # 000       0000000  000   000  000000000  
+    # 000      000       0000  000     000     
+    # 000      000       000 0 000     000     
+    # 000      000       000  0000     000     
+    # 0000000   0000000  000   000     000     
+    
+    it 'lcnt' ->
+        s = 'abc'
+        n = 123
+        kstr.lcnt()                     .should.eql 0
+        kstr.lcnt(null, 'n')            .should.eql 0
+        kstr.lcnt(undefined, 'u')       .should.eql 0
+        kstr.lcnt(Infinity, 'Inf')      .should.eql 0
+        kstr.lcnt({}, '{')              .should.eql 0
+        kstr.lcnt([], '[')              .should.eql 0
+        kstr.lcnt('' 1)                 .should.eql 0
+        kstr.lcnt('ax' '')              .should.eql 0
+        kstr.lcnt('' 'xy')              .should.eql 0
+        kstr.lcnt('abc', Infinity)      .should.eql 0
+        kstr.lcnt('abc' null)           .should.eql 0
+        kstr.lcnt('abc' undefined)      .should.eql 0
+        kstr.lcnt('abc' {})             .should.eql 0
+        kstr.lcnt('abc' ['ab''b'])      .should.eql 0
+        kstr.lcnt('abc' ['a''b'])       .should.eql 2
+        kstr.lcnt(s, 'ac')              .should.eql 1
+        kstr.lcnt(n, '13')              .should.eql 1
+        kstr.lcnt(11202, '12')          .should.eql 3
+        kstr.lcnt('   xx' ' ')          .should.eql 3
+        kstr.lcnt('12345 blub' '1234')  .should.eql 4
+    
     # 00000000    0000000   0000000    
     # 000   000  000   000  000   000  
     # 00000000   000000000  000   000  
