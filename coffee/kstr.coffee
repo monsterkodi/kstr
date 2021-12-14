@@ -151,6 +151,17 @@ str.time = (t) ->
                 f *= thsnd
         else
             String t
+            
+# 000   000   0000000   000   000  
+# 0000  000  000   000  000 0 000  
+# 000 0 000  000   000  000000000  
+# 000  0000  000   000  000   000  
+# 000   000   0000000   00     00  
+
+str.now = ->
+    
+    now = new Date Date.now()
+    "#{str.lpad now.getHours(), 2 '0'}:#{str.lpad now.getMinutes(), 2 '0'}:#{str.lpad now.getSeconds(), 2 '0'}.#{str.lpad now.getMilliseconds(), 3 '0'}"
         
 #  0000000   000   000   0000000  000  
 # 000   000  0000  000  000       000  
