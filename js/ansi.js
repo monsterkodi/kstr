@@ -1,10 +1,7 @@
-// monsterkodi/kode 0.114.0
-
 var _k_ = {each_r: function (o) {return o instanceof Array ? [] : typeof o == 'string' ? o.split('') : {}}, in: function (a,l) {return (typeof l === 'string' && typeof a === 'string' && a.length ? '' : []).indexOf.call(l,a) >= 0}, list: function (l) {return (l != null ? typeof l.length === 'number' ? l : [] : [])}}
 
-var pull, STYLES, toHexString
+var STYLES, toHexString
 
-pull = require('lodash.pull')
 STYLES = {f0:'#000',f1:'#F00',f2:'#0D0',f3:'#DD0',f4:'#00F',f5:'#D0D',f6:'#0DD',f7:'#AAA',f8:'#555',f9:'#F55',f10:'#5F5',f11:'#FF5',f12:'#55F',f13:'#F5F',f14:'#5FF',f15:'#FFF',b0:'#000',b1:'#A00',b2:'#0A0',b3:'#A50',b4:'#00A',b5:'#A0A',b6:'#0AA',b7:'#AAA',b8:'#555',b9:'#F55',b10:'#5F5',b11:'#FF5',b12:'#55F',b13:'#F5F',b14:'#5FF',b15:'#FFF'}
 
 toHexString = function (num)
@@ -40,7 +37,7 @@ toHexString = function (num)
                         r = red > 0 ? red * 40 + 55 : 0
                         g = green > 0 ? green * 40 + 55 : 0
                         b = blue > 0 ? blue * 40 + 55 : 0
-                        rgb = (function () { var result = []; var list = [r,g,b]; for (var _59_40_ = 0; _59_40_ < list.length; _59_40_++)  { n = list[_59_40_];result.push(toHexString(n))  } return result }).bind(this)().join('')
+                        rgb = (function () { var result = []; var list = [r,g,b]; for (var _57_40_ = 0; _57_40_ < list.length; _57_40_++)  { n = list[_57_40_];result.push(toHexString(n))  } return result }).bind(this)().join('')
                         STYLES[`f${c}`] = `#${rgb}`
                         return STYLES[`b${c}`] = `#${rgb}`
                     })(o[k])
@@ -91,14 +88,14 @@ class Ansi
 {
     static html (s)
     {
-        var andi, lines, l, _81_32_, diss, htmlLine, i, d, span
+        var andi, lines, l, _79_32_, diss, htmlLine, i, d, span
 
         andi = new Ansi()
         lines = []
-        var list = ((_81_32_=(s != null ? s.split('\n') : undefined)) != null ? _81_32_ : [])
-        for (var _81_14_ = 0; _81_14_ < list.length; _81_14_++)
+        var list = ((_79_32_=(s != null ? s.split('\n') : undefined)) != null ? _79_32_ : [])
+        for (var _79_14_ = 0; _79_14_ < list.length; _79_14_++)
         {
-            l = list[_81_14_]
+            l = list[_79_14_]
             diss = andi.dissect(l)[1]
             htmlLine = ''
             for (i = 0; i < diss.length; i++)
@@ -153,7 +150,7 @@ class Ansi
         }
         delStyle = function (style)
         {
-            return pull(st,style)
+            return st.splice(st.indexOf(style),1)
         }
         setFG = function (cs)
         {
@@ -293,9 +290,9 @@ class Ansi
             }
             cs = c.trimRight(';').split(';')
             var list = _k_.list(cs)
-            for (var _198_21_ = 0; _198_21_ < list.length; _198_21_++)
+            for (var _196_21_ = 0; _196_21_ < list.length; _196_21_++)
             {
-                code = list[_198_21_]
+                code = list[_196_21_]
                 code = parseInt(code,10)
                 switch (code)
                 {

@@ -8,8 +8,6 @@
 
 # based on code from https://github.com/rburns/ansi-to-html
 
-pull = require 'lodash.pull'
-
 STYLES =
     f0:  '#000' # normal intensity
     f1:  '#F00'
@@ -114,7 +112,7 @@ class Ansi
             st = []
             
         addStyle = (style) -> st.push style if style not in st
-        delStyle = (style) -> pull st, style
+        delStyle = (style) -> st.splice st.indexOf(style), 1
         
         setFG = (cs) -> 
             if cs.length == 5

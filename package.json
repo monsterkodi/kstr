@@ -1,6 +1,6 @@
 {
   "name": "kstr",
-  "version": "0.16.0",
+  "version": "0.17.0",
   "description": "string utilities",
   "main": "js/kstr.js",
   "files": [
@@ -21,8 +21,7 @@
   "repository": "github:monsterkodi/kstr",
   "dependencies": {
     "noon": "monsterkodi/noon",
-    "html-entities": "^2.3.2",
-    "lodash.pull": "^4.1.0"
+    "html-entities": "^2.3.2"
   },
   "devDependencies": {
     "kode": "monsterkodi/kode"
