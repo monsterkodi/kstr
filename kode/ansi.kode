@@ -49,9 +49,9 @@ toHexString = (num) ->
     while num.length < 2 then num = "0#{num}"
     num
 
-[0..5].forEach (red) ->
-    [0..5].forEach (green) ->
-        [0..5].forEach (blue) ->
+[0..5] each (red) ->
+    [0..5] each (green) ->
+        [0..5] each (blue) ->
             c = 16 + (red * 36) + (green * 6) + blue
             r = if red   > 0 then red   * 40 + 55 else 0
             g = if green > 0 then green * 40 + 55 else 0
@@ -60,7 +60,7 @@ toHexString = (num) ->
             STYLES["f#{c}"] = "##{rgb}"
             STYLES["b#{c}"] = "##{rgb}"
 
-[0..23].forEach (gray) ->
+[0..23] each (gray) ->
     c = gray+232
     l = toHexString(gray*10 + 8)
     STYLES["f#{c}"] = "##{l}#{l}#{l}"
@@ -169,7 +169,7 @@ class Ansi
                         styl:  "background-color:#{bg};"
                     space = ''
                     
-            for i in [0...t.length]
+            for i in 0...t.length
                 if t[i] != ' '
                     mstrt = start+i if match == ''
                     match += t[i]
@@ -193,33 +193,30 @@ class Ansi
         
         ansiCode = (m, c) ->
             ansiMatch = true
-            c = '0' if c.trim().length is 0            
+            c = '0' if c.trim().length == 0            
             cs = c.trimRight(';').split(';')
             for code in cs
                 code = parseInt code, 10
-                switch 
-                    when code is 0          then resetStyle()
-                    when code is 1          
-                        addStyle 'font-weight:bold'
-                        fg = toHighIntensity fg
-                    when code is 2          then addStyle 'opacity:0.5'
-                    when code is 4          then addStyle 'text-decoration:underline'
-                    when code is 7          then invert = true            
-                    when code is 27         then invert = false
-                    when code is 8          then addStyle 'display:none'
-                    when code is 9          then addStyle 'text-decoration:line-through'
-                    when code is 39         then fg = STYLES["f15"] # default foreground
-                    when code is 49         then bg = STYLES["b0"]  # default background
-                    when code is 38         then setFG cs 
-                    when code is 48         then setBG cs 
-                    when  30 <= code <= 37  then fg = STYLES["f#{code - 30}"] # normal intensity
-                    when  40 <= code <= 47  then bg = STYLES["b#{code - 40}"]
-                    when  90 <= code <= 97  then fg = STYLES["f#{8+code - 90}"]  # high intensity
-                    when 100 <= code <= 107 then bg = STYLES["b#{8+code - 100}"]
-                    when code is 28         then delStyle 'display:none'
-                    when code is 22         
-                        delStyle 'font-weight:bold'
-                        delStyle 'opacity:0.5'
+                switch code
+                    0   ➜   resetStyle()
+                    1   ➜   addStyle 'font-weight:bold'; fg = toHighIntensity fg
+                    2   ➜   addStyle 'opacity:0.5'
+                    4   ➜   addStyle 'text-decoration:underline'
+                    7   ➜   invert = true            
+                    27  ➜   invert = false
+                    8   ➜   addStyle 'display:none'
+                    9   ➜   addStyle 'text-decoration:line-through'
+                    39  ➜   fg = STYLES["f15"] # default foreground
+                    49  ➜   bg = STYLES["b0"]  # default background
+                    38  ➜   setFG cs 
+                    48  ➜   setBG cs 
+                    28  ➜   delStyle 'display:none'
+                    22  ➜   delStyle 'font-weight:bold'; delStyle 'opacity:0.5'
+                        ➜   if 
+                                 30 <= code <= 37  ➜ fg = STYLES["f#{code - 30}"] # normal intensity
+                                 40 <= code <= 47  ➜ bg = STYLES["b#{code - 40}"]
+                                 90 <= code <= 97  ➜ fg = STYLES["f#{8+code - 90}"] # high intensity
+                                100 <= code <= 107 ➜ bg = STYLES["b#{8+code - 100}"]
                 break if code in [38, 48]
             ''
             

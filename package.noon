@@ -1,29 +1,23 @@
 name            kstr
-version         0.15.0
+version         0.16.0
 description     string utilities
 main            js/kstr.js
 files
                 js/kstr.js
                 js/ansi.js
 scripts
-                test    ./node_modules/.bin/mocha -c --require koffee/js/register ./coffee/test.coffee
-                watch   ./node_modules/.bin/onchange coffee/test.coffee coffee/kstr.coffee -- npm run test
-repository      github:monsterkodi/kstr
-homepage        https://npmjs.com/package/kstr
+                build   ./node_modules/.bin/kode -o js  kode/test.kode kode/ansi.kode
+                watch   ./node_modules/.bin/kode -wt    kode/test.kode kode/kstr.kode
+                test    ./node_modules/.bin/kode -t     kode/test.kode
 keywords
                 string
                 utilities
 author          monsterkodi
 license         Unlicense
-bugs
-                url  https://github.com/monsterkodi/kstr/issues
+repository      github:monsterkodi/kstr
 dependencies
+                noon            monsterkodi/noon
                 html-entities   ^2.3.2
                 lodash.pull     ^4.1.0
-                noon            ^3.1.0
 devDependencies
-                chai      ^4.3.4
-                klor      ^2.16.1
-                koffee    ^1.19.0
-                mocha     ^9.1.3
-                onchange  ^7.1.0
+                kode  monsterkodi/kode

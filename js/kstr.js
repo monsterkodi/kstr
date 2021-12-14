@@ -1,232 +1,222 @@
-// koffee 1.20.0
+// monsterkodi/kode 0.114.0
 
-/*
-000   000   0000000  000000000  00000000 
-000  000   000          000     000   000
-0000000    0000000      000     0000000  
-000  000        000     000     000   000
-000   000  0000000      000     000   000
- */
-var ESCAPEREGEXP, STRIPANSI, str,
-    indexOf = [].indexOf;
+var _k_ = {in: function (a,l) {return (typeof l === 'string' && typeof a === 'string' && a.length ? '' : []).indexOf.call(l,a) >= 0}, list: function (l) {return (l != null ? typeof l.length === 'number' ? l : [] : [])}}
 
-str = function(o) {
-    var noon;
-    if (o == null) {
-        return 'null';
+var str, ESCAPEREGEXP, STRIPANSI
+
+
+str = function (o)
+{
+    var _13_17_, noon
+
+    if (!(o != null))
+    {
+        return 'null'
     }
-    if (typeof o === 'object') {
-        if (o._str != null) {
-            return o._str();
-        } else {
-            noon = require('noon');
-            return "\n" + noon.stringify(o, {
-                circular: true
-            });
+    if (typeof(o) === 'object')
+    {
+        if ((o._str != null))
+        {
+            return o._str()
         }
-    } else {
-        return String(o);
-    }
-};
-
-str.encode = function(s, spaces) {
-    var entity, r, xmlEntities;
-    if (spaces == null) {
-        spaces = true;
-    }
-    entity = require('html-entities');
-    xmlEntities = new entity.XmlEntities();
-    if (s) {
-        r = xmlEntities.encode(s);
-        if (spaces) {
-            r = r.replace(/\s/g, '&nbsp;');
+        else
+        {
+            noon = require('noon')
+            return "\n" + noon.stringify(o,{circular:true})
         }
-        return r;
-    } else {
-        return '';
     }
-};
+    else
+    {
+        return String(o)
+    }
+}
 
-ESCAPEREGEXP = /[-\\^$*+?.()|[\]{}\/]/g;
+str.encode = function (s, spaces = true)
+{
+    var entity, xmlEntities, r
 
-str.escapeRegexp = function(s) {
-    return s.replace(ESCAPEREGEXP, '\\$&');
-};
-
-str.rstrip = function(s, cs) {
-    var ref;
-    if (cs == null) {
-        cs = ' ';
-    }
-    if (s != null) {
-        s;
-    } else {
-        s = '';
-    }
-    while (ref = s.slice(-1)[0], indexOf.call(cs, ref) >= 0) {
-        s = s.slice(0, s.length - 1);
-    }
-    return s;
-};
-
-str.lstrip = function(s, cs) {
-    var ref;
-    if (cs == null) {
-        cs = ' ';
-    }
-    if (s != null) {
-        s;
-    } else {
-        s = '';
-    }
-    while (ref = s[0], indexOf.call(cs, ref) >= 0) {
-        s = s.slice(1);
-    }
-    return s;
-};
-
-str.strip = function(s, cs) {
-    if (cs == null) {
-        cs = ' ';
-    }
-    return str.rstrip(str.lstrip(s, cs), cs);
-};
-
-str.trim = str.strip;
-
-str.ltrim = str.lstrip;
-
-str.rtrim = str.rstrip;
-
-str.lcnt = function(s, c) {
-    var i, ref;
-    if (s != null) {
-        s;
-    } else {
-        s = '';
-    }
-    if (typeof s === 'number' && Number.isFinite(s)) {
-        s = String(s);
-    }
-    if (typeof s !== 'string') {
-        return 0;
-    }
-    if (c != null) {
-        c;
-    } else {
-        c = '';
-    }
-    i = -1;
-    while (ref = s[++i], indexOf.call(c, ref) >= 0) {}
-    return i;
-};
-
-str.lpad = function(s, l, c) {
-    if (c == null) {
-        c = ' ';
-    }
-    s = String(s);
-    while (s.length < l) {
-        s = c + s;
-    }
-    return s;
-};
-
-str.rpad = function(s, l, c) {
-    if (c == null) {
-        c = ' ';
-    }
-    s = String(s);
-    while (s.length < l) {
-        s += c;
-    }
-    return s;
-};
-
-str.pad = str.rpad;
-
-str.detab = function(s) {
-    var i;
-    s = String(s);
-    i = 0;
-    while (i < s.length) {
-        if (s[i] === '\t') {
-            s = s.slice(0, i) + (str.lpad('', 4 - (i % 4))) + s.slice(i + 1);
+    entity = require('html-entities')
+    xmlEntities = new entity.XmlEntities()
+    if (s)
+    {
+        r = xmlEntities.encode(s)
+        if (spaces)
+        {
+            r = r.replace(/\s/g,'&nbsp;')
         }
-        i += 1;
+        return r
     }
-    return s;
-};
+    else
+    {
+        return ''
+    }
+}
+ESCAPEREGEXP = /[-\\^$*+?.()|[\]{}\/]/g
 
-str.time = function(t) {
-    var f, j, k, len, len1, m, num, o, ref, ref1, thsnd;
-    switch (typeof t) {
+str.escapeRegexp = function (s)
+{
+    return s.replace(ESCAPEREGEXP,'\\$&')
+}
+
+str.rstrip = function (s, cs = ' ')
+{
+    s = (s != null ? s : '')
+    while (_k_.in(s.slice(-1)[0],cs))
+    {
+        s = s.slice(0, s.length - 1)
+    }
+    return s
+}
+
+str.lstrip = function (s, cs = ' ')
+{
+    s = (s != null ? s : '')
+    while (_k_.in(s[0],cs))
+    {
+        s = s.slice(1)
+    }
+    return s
+}
+
+str.strip = function (s, cs = ' ')
+{
+    return str.rstrip(str.lstrip(s,cs),cs)
+}
+str.trim = str.strip
+str.ltrim = str.lstrip
+str.rtrim = str.rstrip
+
+str.lcnt = function (s, c)
+{
+    var i
+
+    s = (s != null ? s : '')
+    if (typeof(s) === 'number' && Number.isFinite(s))
+    {
+        s = String(s)
+    }
+    if (typeof(s) !== 'string')
+    {
+        return 0
+    }
+    c = (c != null ? c : '')
+    i = -1
+    while (_k_.in(s[++i],c))
+    {
+    }
+    return i
+}
+
+str.lpad = function (s, l, c = ' ')
+{
+    s = String(s)
+    while (s.length < l)
+    {
+        s = c + s
+    }
+    return s
+}
+
+str.rpad = function (s, l, c = ' ')
+{
+    s = String(s)
+    while (s.length < l)
+    {
+        s += c
+    }
+    return s
+}
+str.pad = str.rpad
+
+str.detab = function (s)
+{
+    var i
+
+    s = String(s)
+    i = 0
+    while (i < s.length)
+    {
+        if (s[i] === '\t')
+        {
+            s = s.slice(0, typeof i === 'number' ? i : -1) + (str.lpad('',4 - (i % 4))) + s.slice(i + 1)
+        }
+        i += 1
+    }
+    return s
+}
+
+str.time = function (t)
+{
+    var f, o, k, num, thsnd
+
+    switch (typeof(t))
+    {
         case 'number':
-            f = 1;
-            o = {
-                ms: 1000,
-                second: 60,
-                minute: 60,
-                hour: 24,
-                day: 30,
-                month: 12,
-                year: 0
-            };
-            ref = Object.keys(o);
-            for (j = 0, len = ref.length; j < len; j++) {
-                k = ref[j];
-                num = parseInt(t / f);
-                f *= o[k];
-                if (k === 'year' || t < f) {
-                    if (k !== 'ms' && num !== 1) {
-                        k += 's';
+            f = 1
+            o = {ms:1000,second:60,minute:60,hour:24,day:30,month:12,year:0}
+            var list = _k_.list(Object.keys(o))
+            for (var _136_18_ = 0; _136_18_ < list.length; _136_18_++)
+            {
+                k = list[_136_18_]
+                num = parseInt(t / f)
+                f *= o[k]
+                if (k === 'year' || t < f)
+                {
+                    if (k !== 'ms' && num !== 1)
+                    {
+                        k += 's'
                     }
-                    return '' + num + ' ' + k;
+                    return '' + num + ' ' + k
                 }
             }
-            break;
+            break
         case 'bigint':
-            thsnd = BigInt(1000);
-            f = thsnd;
-            ref1 = ['ns', 'μs', 'ms', 'second'];
-            for (m = 0, len1 = ref1.length; m < len1; m++) {
-                k = ref1[m];
-                if (k === 'seconds' || t < f) {
-                    num = parseInt(thsnd * t / f);
-                    if (k === 'second' && num !== 1) {
-                        k += 's';
+            thsnd = BigInt(1000)
+            f = thsnd
+            var list1 = ['ns','μs','ms','second']
+            for (var _145_18_ = 0; _145_18_ < list1.length; _145_18_++)
+            {
+                k = list1[_145_18_]
+                if (k === 'seconds' || t < f)
+                {
+                    num = parseInt(thsnd * t / f)
+                    if (k === 'second' && num !== 1)
+                    {
+                        k += 's'
                     }
-                    return '' + num + ' ' + k;
+                    return '' + num + ' ' + k
                 }
-                f *= thsnd;
+                f *= thsnd
             }
-            break;
+            break
         default:
-            return String(t);
+            return String(t)
     }
-};
 
-str.now = function() {
-    var now;
-    now = new Date(Date.now());
-    return (str.lpad(now.getHours(), 2, '0')) + ":" + (str.lpad(now.getMinutes(), 2, '0')) + ":" + (str.lpad(now.getSeconds(), 2, '0')) + "." + (str.lpad(now.getMilliseconds(), 3, '0'));
-};
+}
 
-STRIPANSI = /\x1B[[(?);]{0,2}(;?\d)*./g;
+str.now = function ()
+{
+    var now
 
-str.stripAnsi = function(s) {
-    return typeof s.replace === "function" ? s.replace(STRIPANSI, '') : void 0;
-};
+    now = new Date(Date.now())
+    return `${str.lpad(now.getHours(),2,'0')}:${str.lpad(now.getMinutes(),2,'0')}:${str.lpad(now.getSeconds(),2,'0')}.${str.lpad(now.getMilliseconds(),3,'0')}`
+}
+STRIPANSI = /\x1B[[(?);]{0,2}(;?\d)*./g
 
-str.ansi2html = function(s) {
-    var Ansi;
-    Ansi = require('./ansi');
-    return Ansi.html(s);
-};
+str.stripAnsi = function (s)
+{
+    var _173_13_
 
-str.ansi = require('./ansi');
+    return (typeof s.replace === "function" ? s.replace(STRIPANSI,'') : undefined)
+}
 
-module.exports = str;
+str.ansi2html = function (s)
+{
+    var Ansi
 
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoia3N0ci5qcyIsInNvdXJjZVJvb3QiOiIuLi9jb2ZmZWUiLCJzb3VyY2VzIjpbImtzdHIuY29mZmVlIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7O0FBQUE7Ozs7Ozs7QUFBQSxJQUFBLDRCQUFBO0lBQUE7O0FBUUEsR0FBQSxHQUFNLFNBQUMsQ0FBRDtBQUVGLFFBQUE7SUFBQSxJQUFxQixTQUFyQjtBQUFBLGVBQU8sT0FBUDs7SUFDQSxJQUFHLE9BQU8sQ0FBUCxLQUFhLFFBQWhCO1FBQ0ksSUFBRyxjQUFIO21CQUNJLENBQUMsQ0FBQyxJQUFGLENBQUEsRUFESjtTQUFBLE1BQUE7WUFHSSxJQUFBLEdBQU8sT0FBQSxDQUFRLE1BQVI7bUJBQ1AsSUFBQSxHQUFPLElBQUksQ0FBQyxTQUFMLENBQWUsQ0FBZixFQUFrQjtnQkFBQSxRQUFBLEVBQVUsSUFBVjthQUFsQixFQUpYO1NBREo7S0FBQSxNQUFBO2VBT0ksTUFBQSxDQUFPLENBQVAsRUFQSjs7QUFIRTs7QUFrQk4sR0FBRyxDQUFDLE1BQUosR0FBYSxTQUFDLENBQUQsRUFBSSxNQUFKO0FBRVQsUUFBQTs7UUFGYSxTQUFPOztJQUVwQixNQUFBLEdBQVMsT0FBQSxDQUFRLGVBQVI7SUFDVCxXQUFBLEdBQWMsSUFBSSxNQUFNLENBQUMsV0FBWCxDQUFBO0lBRWQsSUFBRyxDQUFIO1FBQ0ksQ0FBQSxHQUFJLFdBQVcsQ0FBQyxNQUFaLENBQW1CLENBQW5CO1FBQ0osSUFBRyxNQUFIO1lBQ0ksQ0FBQSxHQUFJLENBQUMsQ0FBQyxPQUFGLENBQVUsS0FBVixFQUFpQixRQUFqQixFQURSOztlQUVBLEVBSko7S0FBQSxNQUFBO2VBTUksR0FOSjs7QUFMUzs7QUFhYixZQUFBLEdBQWU7O0FBRWYsR0FBRyxDQUFDLFlBQUosR0FBbUIsU0FBQyxDQUFEO1dBRWYsQ0FBQyxDQUFDLE9BQUYsQ0FBVSxZQUFWLEVBQXdCLE1BQXhCO0FBRmU7O0FBV25CLEdBQUcsQ0FBQyxNQUFKLEdBQWEsU0FBQyxDQUFELEVBQUksRUFB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QixHQUEzQixDQUFELENBQUEsR0FBZ0MsR0FBaEMsR0FBa0MsQ0FBQyxHQUFHLENBQUMsSUFBSixDQUFTLEdBQUcsQ0FBQyxVQUFKLENBQUEsQ0FBVCxFQUEyQixDQUEzQixFQUE2QixHQUE3QixDQUFELENBQWxDLEdBQW9FLEdBQXBFLEdBQXNFLENBQUMsR0FBRyxDQUFDLElBQUosQ0FBUyxHQUFHLENBQUMsVUFBSixDQUFBLENBQVQsRUFBMkIsQ0FBM0IsRUFBNkIsR0FBN0IsQ0FBRCxDQUF0RSxHQUF3RyxHQUF4RyxHQUEwRyxDQUFDLEdBQUcsQ0FBQyxJQUFKLENBQVMsR0FBRyxDQUFDLGVBQUosQ0FBQSxDQUFULEVBQWdDLENBQWhDLEVBQWtDLEdBQWxDLENBQUQ7QUFIdEc7O0FBV1YsU0FBQSxHQUFZOztBQUNaLEdBQUcsQ0FBQyxTQUFKLEdBQWdCLFNBQUMsQ0FBRDs2Q0FDWixDQUFDLENBQUMsUUFBUyxXQUFXO0FBRFY7O0FBR2hCLEdBQUcsQ0FBQyxTQUFKLEdBQWdCLFNBQUMsQ0FBRDtBQUNaLFFBQUE7SUFBQSxJQUFBLEdBQU8sT0FBQSxDQUFRLFFBQVI7V0FDUCxJQUFJLENBQUMsSUFBTCxDQUFVLENBQVY7QUFGWTs7QUFJaEIsR0FBRyxDQUFDLElBQUosR0FBVyxPQUFBLENBQVEsUUFBUjs7QUFFWCxNQUFNLENBQUMsT0FBUCxHQUFpQiIsInNvdXJjZXNDb250ZW50IjpbIiMjI1xuMDAwICAgMDAwICAgMDAwMDAwMCAgMDAwMDAwMDAwICAwMDAwMDAwMCBcbjAwMCAgMDAwICAgMDAwICAgICAgICAgIDAwMCAgICAgMDAwICAgMDAwXG4wMDAwMDAwICAgIDAwMDAwMDAgICAgICAwMDAgICAgIDAwMDAwMDAgIFxuMDAwICAwMDAgICAgICAgIDAwMCAgICAgMDAwICAgICAwMDAgICAwMDBcbjAwMCAgIDAwMCAgMDAwMDAwMCAgICAgIDAwMCAgICAgMDAwICAgMDAwXG4jIyNcblxuc3RyID0gKG8pIC0+XG4gICAgXG4gICAgcmV0dXJuICdudWxsJyBpZiBub3Qgbz9cbiAgICBpZiB0eXBlb2YobykgPT0gJ29iamVjdCdcbiAgICAgICAgaWYgby5fc3RyP1xuICAgICAgICAgICAgby5fc3RyKClcbiAgICAgICAgZWxzZVxuICAgICAgICAgICAgbm9vbiA9IHJlcXVpcmUgJ25vb24nXG4gICAgICAgICAgICBcIlxcblwiICsgbm9vbi5zdHJpbmdpZnkgbywgY2lyY3VsYXI6IHRydWVcbiAgICBlbHNlXG4gICAgICAgIFN0cmluZyBvXG5cbiMgMDAwMDAwMDAgIDAwMCAgIDAwMCAgIDAwMDAwMDAgICAwMDAwMDAwICAgMDAwMDAwMCAgICAwMDAwMDAwMFxuIyAwMDAgICAgICAgMDAwMCAgMDAwICAwMDAgICAgICAgMDAwICAgMDAwICAwMDAgICAwMDAgIDAwMCAgICAgXG4jIDAwMDAwMDAgICAwMDAgMCAwMDAgIDAwMCAgICAgICAwMDAgICAwMDAgIDAwMCAgIDAwMCAgMDAwMDAwMCBcbiMgMDAwICAgICAgIDAwMCAgMDAwMCAgMDAwICAgICAgIDAwMCAgIDAwMCAgMDAwICAgMDAwICAwMDAgICAgIFxuIyAwMDAwMDAwMCAgMDAwICAgMDAwICAgMDAwMDAwMCAgIDAwMDAwMDAgICAwMDAwMDAwICAgIDAwMDAwMDAwXG5cbnN0ci5lbmNvZGUgPSAocywgc3BhY2VzPXRydWUpIC0+XG4gICAgXG4gICAgZW50aXR5ID0gcmVxdWlyZSAnaHRtbC1lbnRpdGllcydcbiAgICB4bWxFbnRpdGllcyA9IG5ldyBlbnRpdHkuWG1sRW50aXRpZXMoKVxuICAgIFxuICAgIGlmIHNcbiAgICAgICAgciA9IHhtbEVudGl0aWVzLmVuY29kZSBzXG4gICAgICAgIGlmIHNwYWNlc1xuICAgICAgICAgICAgciA9IHIucmVwbGFjZSAvXFxzL2csICcmbmJzcDsnXG4gICAgICAgIHJcbiAgICBlbHNlXG4gICAgICAgICcnXG4gIFxuRVNDQVBFUkVHRVhQID0gL1stXFxcXF4kKis/LigpfFtcXF17fVxcL10vZ1xuXG5zdHIuZXNjYXBlUmVnZXhwID0gKHMpIC0+XG4gICAgXG4gICAgcy5yZXBsYWNlIEVTQ0FQRVJFR0VYUCwgJ1xcXFwkJidcbiAgICAgICAgICAgXG4jICAwMDAwMDAwICAwMDAwMDAwMDAgIDAwMDAwMDAwICAgMDAwICAwMDAwMDAwMCAgIFxuIyAwMDAgICAgICAgICAgMDAwICAgICAwMDAgICAwMDAgIDAwMCAgMDAwICAgMDAwICBcbiMgMDAwMDAwMCAgICAgIDAwMCAgICAgMDAwMDAwMCAgICAwMDAgIDAwMDAwMDAwICAgXG4jICAgICAgMDAwICAgICAwMDAgICAgIDAwMCAgIDAwMCAgMDAwICAwMDAgICAgICAgIFxuIyAwMDAwMDAwICAgICAgMDAwICAgICAwMDAgICAwMDAgIDAwMCAgMDAwICAgICAgICBcblxuXG5zdHIucnN0cmlwID0gKHMsIGNzPScgJykgLT5cbiAgICBcbiAgICBzID89ICcnXG4gICAgcyA9IHNbMC4uLnMubGVuZ3RoLTFdIHdoaWxlIHNbLTFdIGluIGNzXG4gICAgc1xuXG5zdHIubHN0cmlwID0gKHMsIGNzPScgJykgLT5cbiAgICBcbiAgICBzID89ICcnXG4gICAgcyA9IHNbMS4uXSB3aGlsZSBzWzBdIGluIGNzXG4gICAgc1xuICAgICAgICAgICAgXG5zdHIuc3RyaXAgPSAocywgY3M9JyAnKSAtPiBzdHIucnN0cmlwIHN0ci5sc3RyaXAocyxjcyksIGNzXG5cbiMgMDAwMDAwMDAwICAwMDAwMDAwMCAgIDAwMCAgMDAgICAgIDAwICBcbiMgICAgMDAwICAgICAwMDAgICAwMDAgIDAwMCAgMDAwICAgMDAwICBcbiMgICAgMDAwICAgICAwMDAwMDAwICAgIDAwMCAgMDAwMDAwMDAwICBcbiMgICAgMDAwICAgICAwMDAgICAwMDAgIDAwMCAgMDAwIDAgMDAwICBcbiMgICAgMDAwICAgICAwMDAgICAwMDAgIDAwMCAgMDAwICAgMDAwICBcblxuc3RyLnRyaW0gID0gc3RyLnN0cmlwXG5zdHIubHRyaW0gPSBzdHIubHN0cmlwXG5zdHIucnRyaW0gPSBzdHIucnN0cmlwXG5cbiMgIDAwMDAwMDAgIDAwMCAgIDAwMCAgMDAwMDAwMDAwICBcbiMgMDAwICAgICAgIDAwMDAgIDAwMCAgICAgMDAwICAgICBcbiMgMDAwICAgICAgIDAwMCAwIDAwMCAgICAgMDAwICAgICBcbiMgMDAwICAgICAgIDAwMCAgMDAwMCAgICAgMDAwICAgICBcbiMgIDAwMDAwMDAgIDAwMCAgIDAwMCAgICAgMDAwICAgICBcblxuc3RyLmxjbnQgPSAocywgYykgLT5cbiAgICBzID89ICcnXG4gICAgaWYgdHlwZW9mIHMgPT0gJ251bWJlcicgYW5kIE51bWJlci5pc0Zpbml0ZSBzIHRoZW4gcyA9IFN0cmluZyBzXG4gICAgcmV0dXJuIDAgaWYgdHlwZW9mIHMgIT0gJ3N0cmluZydcbiAgICBjID89ICcnXG4gICAgaSA9IC0xXG4gICAgd2hpbGUgc1srK2ldIGluIGMgdGhlblxuICAgIGkgICAgXG4gICAgXG4jIDAwMDAwMDAwICAgIDAwMDAwMDAgICAwMDAwMDAwICAgIFxuIyAwMDAgICAwMDAgIDAwMCAgIDAwMCAgMDAwICAgMDAwICBcbiMgMDAwMDAwMDAgICAwMDAwMDAwMDAgIDAwMCAgIDAwMCAgXG4jIDAwMCAgICAgICAgMDAwICAgMDAwICAwMDAgICAwMDAgIFxuIyAwMDAgICAgICAgIDAwMCAgIDAwMCAgMDAwMDAwMCAgICBcblxuc3RyLmxwYWQgPSAocywgbCwgYz0nICcpIC0+XG4gICAgcyA9IFN0cmluZyBzXG4gICAgd2hpbGUgcy5sZW5ndGggPCBsIHRoZW4gcyA9IGMgKyBzXG4gICAgc1xuXG5zdHIucnBhZCA9IChzLCBsLCBjPScgJykgLT5cbiAgICBzID0gU3RyaW5nIHNcbiAgICB3aGlsZSBzLmxlbmd0aCA8IGwgdGhlbiBzICs9IGNcbiAgICBzXG4gICAgXG5zdHIucGFkID0gc3RyLnJwYWRcblxuc3RyLmRldGFiID0gKHMpIC0+XG4gICAgcyA9IFN0cmluZyBzXG4gICAgaSA9IDBcbiAgICB3aGlsZSBpIDwgcy5sZW5ndGhcbiAgICAgICAgaWYgc1tpXSA9PSAnXFx0J1xuICAgICAgICAgICAgcyA9IHNbLi4uaV0gKyAoc3RyLmxwYWQgJycgNC0oaSU0KSkgKyBzW2krMS4uXVxuICAgICAgICBpICs9IDFcbiAgICBzXG4gICAgXG4jIDAwMDAwMDAwMCAgMDAwICAwMCAgICAgMDAgIDAwMDAwMDAwICBcbiMgICAgMDAwICAgICAwMDAgIDAwMCAgIDAwMCAgMDAwICAgICAgIFxuIyAgICAwMDAgICAgIDAwMCAgMDAwMDAwMDAwICAwMDAwMDAwICAgXG4jICAgIDAwMCAgICAgMDAwICAwMDAgMCAwMDAgIDAwMCAgICAgICBcbiMgICAgMDAwICAgICAwMDAgIDAwMCAgIDAwMCAgMDAwMDAwMDAgIFxuXG5zdHIudGltZSA9ICh0KSAtPlxuICAgIHN3aXRjaCB0eXBlb2YgdCBcbiAgICAgICAgd2hlbiAnbnVtYmVyJ1xuICAgICAgICAgICAgZiA9IDFcbiAgICAgICAgICAgIG8gPSBcbiAgICAgICAgICAgICAgICBtczogICAgIDEwMDBcbiAgICAgICAgICAgICAgICBzZWNvbmQ6IDYwXG4gICAgICAgICAgICAgICAgbWludXRlOiA2MFxuICAgICAgICAgICAgICAgIGhvdXI6ICAgMjRcbiAgICAgICAgICAgICAgICBkYXk6ICAgIDMwXG4gICAgICAgICAgICAgICAgbW9udGg6ICAxMlxuICAgICAgICAgICAgICAgIHllYXI6ICAgMFxuICAgICAgICAgICAgZm9yIGsgaW4gT2JqZWN0LmtleXMgb1xuICAgICAgICAgICAgICAgIG51bSA9IHBhcnNlSW50IHQvZlxuICAgICAgICAgICAgICAgIGYgKj0gb1trXVxuICAgICAgICAgICAgICAgIGlmIGsgPT0gJ3llYXInIG9yIHQgPCBmXG4gICAgICAgICAgICAgICAgICAgIGsgKz0gJ3MnIGlmIGsgIT0gJ21zJyBhbmQgbnVtICE9IDFcbiAgICAgICAgICAgICAgICAgICAgcmV0dXJuICcnICsgbnVtICsgJyAnICsga1xuICAgICAgICB3aGVuICdiaWdpbnQnXG4gICAgICAgICAgICB0aHNuZCA9IEJpZ0ludCAxMDAwXG4gICAgICAgICAgICBmID0gdGhzbmRcbiAgICAgICAgICAgIGZvciBrIGluIFsnbnMnICfOvHMnICdtcycgJ3NlY29uZCddIFxuICAgICAgICAgICAgICAgIGlmIGsgPT0gJ3NlY29uZHMnIG9yIHQgPCBmIFxuICAgICAgICAgICAgICAgICAgICBudW0gPSBwYXJzZUludCB0aHNuZCAqIHQgLyBmXG4gICAgICAgICAgICAgICAgICAgIGsgKz0gJ3MnIGlmIGsgPT0gJ3NlY29uZCcgYW5kIG51bSAhPSAxXG4gICAgICAgICAgICAgICAgICAgIHJldHVybiAnJyArIG51bSArICcgJyArIGtcbiAgICAgICAgICAgICAgICBmICo9IHRoc25kXG4gICAgICAgIGVsc2VcbiAgICAgICAgICAgIFN0cmluZyB0XG4gICAgICAgICAgICBcbiMgMDAwICAgMDAwICAgMDAwMDAwMCAgIDAwMCAgIDAwMCAgXG4jIDAwMDAgIDAwMCAgMDAwICAgMDAwICAwMDAgMCAwMDAgIFxuIyAwMDAgMCAwMDAgIDAwMCAgIDAwMCAgMDAwMDAwMDAwICBcbiMgMDAwICAwMDAwICAwMDAgICAwMDAgIDAwMCAgIDAwMCAgXG4jIDAwMCAgIDAwMCAgIDAwMDAwMDAgICAwMCAgICAgMDAgIFxuXG5zdHIubm93ID0gLT5cbiAgICBcbiAgICBub3cgPSBuZXcgRGF0ZSBEYXRlLm5vdygpXG4gICAgXCIje3N0ci5scGFkIG5vdy5nZXRIb3VycygpLCAyICcwJ306I3tzdHIubHBhZCBub3cuZ2V0TWludXRlcygpLCAyICcwJ306I3tzdHIubHBhZCBub3cuZ2V0U2Vjb25kcygpLCAyICcwJ30uI3tzdHIubHBhZCBub3cuZ2V0TWlsbGlzZWNvbmRzKCksIDMgJzAnfVwiXG4gICAgICAgIFxuIyAgMDAwMDAwMCAgIDAwMCAgIDAwMCAgIDAwMDAwMDAgIDAwMCAgXG4jIDAwMCAgIDAwMCAgMDAwMCAgMDAwICAwMDAgICAgICAgMDAwICBcbiMgMDAwMDAwMDAwICAwMDAgMCAwMDAgIDAwMDAwMDAgICAwMDAgIFxuIyAwMDAgICAwMDAgIDAwMCAgMDAwMCAgICAgICAwMDAgIDAwMCAgXG4jIDAwMCAgIDAwMCAgMDAwICAgMDAwICAwMDAwMDAwICAgMDAwICBcblxuU1RSSVBBTlNJID0gL1xceDFCW1soPyk7XXswLDJ9KDs/XFxkKSouL2dcbnN0ci5zdHJpcEFuc2kgPSAocykgLT5cbiAgICBzLnJlcGxhY2U/IFNUUklQQU5TSSwgJydcbiAgICAgICAgXG5zdHIuYW5zaTJodG1sID0gKHMpIC0+XG4gICAgQW5zaSA9IHJlcXVpcmUgJy4vYW5zaSdcbiAgICBBbnNpLmh0bWwgc1xuICAgIFxuc3RyLmFuc2kgPSByZXF1aXJlICcuL2Fuc2knXG4gICAgICAgIFxubW9kdWxlLmV4cG9ydHMgPSBzdHJcbiJdfQ==
-//# sourceURL=../coffee/kstr.coffee
+    Ansi = require('./ansi')
+    return Ansi.html(s)
+}
+str.ansi = require('./ansi')
+module.exports = str

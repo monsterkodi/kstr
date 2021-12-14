@@ -126,8 +126,7 @@ str.time = (t) ->
     switch typeof t 
         when 'number'
             f = 1
-            o = 
-                ms:     1000
+            o = ms:     1000
                 second: 60
                 minute: 60
                 hour:   24
