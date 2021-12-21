@@ -19,19 +19,19 @@ toHexString = function (num)
     {   
         var m = (function (red)
     {
-        ;        (function (o) {
+        return         (function (o) {
             var r = _k_.each_r(o)
             for (var k in o)
             {   
                 var m = (function (green)
             {
-                ;                (function (o) {
+                return                 (function (o) {
                     var r = _k_.each_r(o)
                     for (var k in o)
                     {   
                         var m = (function (blue)
                     {
-                        var c, r, g, b, rgb, n
+                        var b, c, g, n, r, rgb
 
                         c = 16 + (red * 36) + (green * 6) + blue
                         r = red > 0 ? red * 40 + 55 : 0
@@ -88,7 +88,7 @@ class Ansi
 {
     static html (s)
     {
-        var andi, lines, l, _79_32_, diss, htmlLine, i, d, span
+        var andi, d, diss, htmlLine, i, l, lines, span, _79_32_
 
         andi = new Ansi()
         lines = []
@@ -127,7 +127,7 @@ class Ansi
 
     tokenize ()
     {
-        var start, ansiHandler, ansiMatch, invert, fg, bg, st, resetStyle, addStyle, delStyle, setFG, setBG, addText, toHighIntensity, ansiCode, tokens, process, length, handler, i
+        var addStyle, addText, ansiCode, ansiHandler, ansiMatch, bg, delStyle, fg, handler, i, invert, length, process, resetStyle, setBG, setFG, st, start, toHighIntensity, tokens
 
         start = 0
         ansiHandler = 2
@@ -176,7 +176,7 @@ class Ansi
         }
         addText = (function (t)
         {
-            var match, mstrt, space, sstrt, addMatch, addSpace, i
+            var addMatch, addSpace, i, match, mstrt, space, sstrt
 
             start = this.text.length
             match = ''
@@ -281,7 +281,7 @@ class Ansi
         }
         ansiCode = function (m, c)
         {
-            var cs, code
+            var code, cs
 
             ansiMatch = true
             if (c.trim().length === 0)

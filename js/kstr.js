@@ -1,13 +1,11 @@
-// monsterkodi/kode 0.114.0
-
 var _k_ = {in: function (a,l) {return (typeof l === 'string' && typeof a === 'string' && a.length ? '' : []).indexOf.call(l,a) >= 0}, list: function (l) {return (l != null ? typeof l.length === 'number' ? l : [] : [])}}
 
-var str, ESCAPEREGEXP, STRIPANSI
+var ESCAPEREGEXP, str, STRIPANSI
 
 
 str = function (o)
 {
-    var _13_17_, noon
+    var noon, _13_17_
 
     if (!(o != null))
     {
@@ -33,7 +31,7 @@ str = function (o)
 
 str.encode = function (s, spaces = true)
 {
-    var entity, xmlEntities, r
+    var entity, r, xmlEntities
 
     entity = require('html-entities')
     xmlEntities = new entity.XmlEntities()
@@ -147,7 +145,7 @@ str.detab = function (s)
 
 str.time = function (t)
 {
-    var f, o, k, num, thsnd
+    var f, k, num, o, thsnd
 
     switch (typeof(t))
     {

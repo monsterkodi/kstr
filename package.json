@@ -1,6 +1,6 @@
 {
   "name": "kstr",
-  "version": "0.17.0",
+  "version": "0.18.0",
   "description": "string utilities",
   "main": "js/kstr.js",
   "files": [
@@ -8,9 +8,9 @@
     "js/ansi.js"
   ],
   "scripts": {
-    "build": "./node_modules/.bin/kode -o js  kode/test.kode kode/ansi.kode",
-    "watch": "./node_modules/.bin/kode -wt    kode/test.kode kode/kstr.kode",
-    "test": "./node_modules/.bin/kode -t     kode/test.kode"
+    "build": "./node_modules/.bin/kode -o js  kode/kstr.kode kode/ansi.kode",
+    "test": "./node_modules/.bin/kode -t     kode/test.kode",
+    "watch": "./node_modules/.bin/kode -wt    kode/*.kode"
   },
   "keywords": [
     "string",

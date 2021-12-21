@@ -1,6 +1,6 @@
 var _k_
 
-var kstr, k, s, n, a2h, ansi, diss
+var a2h, ansi, diss, k, kstr, n, s
 
 kstr = require('../')
 k = require('klor').kolor
@@ -85,7 +85,7 @@ module.exports["kstr"] = function ()
     {
         a2h = function (s, r)
         {
-            compare(kstr.ansi2html(s),r)
+            return compare(kstr.ansi2html(s),r)
         }
         a2h('hello','hello')
         a2h(k.r5('red'),'<span style="color:#ff0000;">red</span>')
@@ -143,4 +143,5 @@ ${k.g5('green')}`,`<span style="color:#ff0000;">red</span>
     })
 }
 module.exports["kstr"]._section_ = true
+module.exports._test_ = true
 module.exports
