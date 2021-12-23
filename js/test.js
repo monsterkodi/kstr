@@ -1,3 +1,5 @@
+// monsterkodi/kode 0.206.0
+
 var _k_
 
 var a2h, ansi, diss, k, kstr, n, s
@@ -6,6 +8,11 @@ kstr = require('../')
 k = require('klor').kolor
 module.exports["kstr"] = function ()
 {
+    section("encode", function ()
+    {
+        compare(kstr.encode(" hello / world !?"),'&nbsp;hello&nbsp;/&nbsp;world&nbsp;!?')
+        compare(kstr.encode("</>"),'&lt;/&gt;')
+    })
     section("escapeRegexp", function ()
     {
         compare(kstr.escapeRegexp('a/b.txt'),'a\\/b\\.txt')

@@ -11,6 +11,11 @@ k = require('klor').kolor
 
 ▸ kstr
 
+    ▸ encode
+    
+        kstr.encode(" hello / world !?")    ▸ '&nbsp;hello&nbsp;/&nbsp;world&nbsp;!?'
+        kstr.encode("</>")                  ▸ '&lt;/&gt;'
+
     ▸ escapeRegexp
         kstr.escapeRegexp('a/b.txt') ▸ 'a\\/b\\.txt'
         
@@ -21,34 +26,34 @@ k = require('klor').kolor
     # 0000000      000     000   000  000  000        
     
     ▸ lstrip
-        kstr.lstrip() ▸ ''
-        kstr.lstrip('') ▸ ''
-        kstr.lstrip('   y') ▸ 'y'
-        kstr.lstrip(' ') ▸ ''
-        kstr.lstrip('x ' 'x') ▸ ' '
-        kstr.lstrip(' yxy ' ' y') ▸ 'xy '
+        kstr.lstrip()                       ▸ ''
+        kstr.lstrip('')                     ▸ ''
+        kstr.lstrip('   y')                 ▸ 'y'
+        kstr.lstrip(' ')                    ▸ ''
+        kstr.lstrip('x ' 'x')               ▸ ' '
+        kstr.lstrip(' yxy ' ' y')           ▸ 'xy '
 
     ▸ rstrip
-        kstr.rstrip() ▸ ''
-        kstr.rstrip('') ▸ ''
-        kstr.rstrip('   y' 'y') ▸ '   '
-        kstr.rstrip(' ') ▸ ''
-        kstr.rstrip(' x' 'x') ▸ ' '
-        kstr.rstrip(' yxy ' ' y') ▸ ' yx'
+        kstr.rstrip()                       ▸ ''
+        kstr.rstrip('')                     ▸ ''
+        kstr.rstrip('   y' 'y')             ▸ '   '
+        kstr.rstrip(' ')                    ▸ ''
+        kstr.rstrip(' x' 'x')               ▸ ' '
+        kstr.rstrip(' yxy ' ' y')           ▸ ' yx'
 
     ▸ strip
-        kstr.strip() ▸ ''
-        kstr.strip('') ▸ ''
-        kstr.strip('abc') ▸ 'abc'
-        kstr.strip('123   y  123' '123') ▸ '   y  '
-        kstr.strip(' x y z ' 'xyz ') ▸ ''
-        kstr.strip('x x' 'x') ▸ ' '
-        kstr.strip(' yxy ' ' y') ▸ 'x'
+        kstr.strip()                        ▸ ''
+        kstr.strip('')                      ▸ ''
+        kstr.strip('abc')                   ▸ 'abc'
+        kstr.strip('123   y  123' '123')    ▸ '   y  '
+        kstr.strip(' x y z ' 'xyz ')        ▸ ''
+        kstr.strip('x x' 'x')               ▸ ' '
+        kstr.strip(' yxy ' ' y')            ▸ 'x'
 
     ▸ trim
-        kstr.trim('123   y  123' '123') ▸ '   y  '
-        kstr.ltrim(' yxy ' ' y') ▸ 'xy '
-        kstr.rtrim('   y' 'y') ▸ '   '
+        kstr.trim('123   y  123' '123')     ▸ '   y  '
+        kstr.ltrim(' yxy ' ' y')            ▸ 'xy '
+        kstr.rtrim('   y' 'y')              ▸ '   '
         
     # 000       0000000  000   000  000000000  
     # 000      000       0000  000     000     
@@ -87,14 +92,14 @@ k = require('klor').kolor
     # 000        000   000  0000000    
     
     ▸ lpad
-        kstr.lpad('', 4) ▸ '    '
-        kstr.lpad('x', 4) ▸ '   x'
-        kstr.lpad(' xxx ', 2) ▸ ' xxx '
+        kstr.lpad('' 4)        ▸ '    '
+        kstr.lpad('x' 4)       ▸ '   x'
+        kstr.lpad(' xxx ' 2)   ▸ ' xxx '
 
     ▸ rpad
-        kstr.rpad('', 4) ▸ '    '
-        kstr.rpad('x', 4) ▸ 'x   '
-        kstr.rpad(' xxx ', 2) ▸ ' xxx '
+        kstr.rpad('' 4)        ▸ '    '
+        kstr.rpad('x' 4)       ▸ 'x   '
+        kstr.rpad(' xxx ' 2)   ▸ ' xxx '
  
     #  0000000   000   000   0000000  000  
     # 000   000  0000  000  000       000  
@@ -111,7 +116,7 @@ k = require('klor').kolor
         a2h """
             #{k.r5('red')}
             #{k.g5('green')}
-            """, """
+            """ """
             <span style="color:#ff0000;">red</span>
             <span style="color:#00ff00;">green</span>
             """
@@ -148,22 +153,22 @@ k = require('klor').kolor
     #    000     000  000   000  00000000  
     
     ▸ time number
-        kstr.time(1                     ) ▸ '1 ms'
-        kstr.time(1000                  ) ▸ '1 second'
-        kstr.time(1001                  ) ▸ '1 second'
-        kstr.time(1999                  ) ▸ '1 second'
-        kstr.time(2000                  ) ▸ '2 seconds'
-        kstr.time(2001                  ) ▸ '2 seconds'
-        kstr.time(59999                 ) ▸ '59 seconds'
-        kstr.time(60000                 ) ▸ '1 minute'
-        kstr.time(120001                ) ▸ '2 minutes'
-        kstr.time(1000*60*60            ) ▸ '1 hour'
-        kstr.time(1000*60*60*24         ) ▸ '1 day'
-        kstr.time(1000*60*60*48         ) ▸ '2 days'
-        kstr.time(1000*60*60*24*30      ) ▸ '1 month'
-        kstr.time(1000*60*60*24*60      ) ▸ '2 months'
-        kstr.time(1000*60*60*24*30*12   ) ▸ '1 year'
-        kstr.time(1000*60*60*24*30*24   ) ▸ '2 years'
+        kstr.time 1                     ▸ '1 ms'
+        kstr.time 1000                  ▸ '1 second'
+        kstr.time 1001                  ▸ '1 second'
+        kstr.time 1999                  ▸ '1 second'
+        kstr.time 2000                  ▸ '2 seconds'
+        kstr.time 2001                  ▸ '2 seconds'
+        kstr.time 59999                 ▸ '59 seconds'
+        kstr.time 60000                 ▸ '1 minute'
+        kstr.time 120001                ▸ '2 minutes'
+        kstr.time 1000*60*60            ▸ '1 hour'
+        kstr.time 1000*60*60*24         ▸ '1 day'
+        kstr.time 1000*60*60*48         ▸ '2 days'
+        kstr.time 1000*60*60*24*30      ▸ '1 month'
+        kstr.time 1000*60*60*24*60      ▸ '2 months'
+        kstr.time 1000*60*60*24*30*12   ▸ '1 year'
+        kstr.time 1000*60*60*24*30*24   ▸ '2 years'
         
     ▸ time bigint
         kstr.time BigInt 1              ▸ '1 ns'

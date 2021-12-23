@@ -98,7 +98,7 @@ class Ansi
             l = list[_79_14_]
             diss = andi.dissect(l)[1]
             htmlLine = ''
-            for (i = 0; i < diss.length; i++)
+            for (var _82_22_ = i = 0, _82_26_ = diss.length; (_82_22_ <= _82_26_ ? i < diss.length : i > diss.length); (_82_22_ <= _82_26_ ? ++i : --i))
             {
                 d = diss[i]
                 span = d.styl && `<span style=\"${d.styl}\">${d.match}</span>` || d.match
@@ -119,6 +119,7 @@ class Ansi
     dissect (input)
     {
         this.input = input
+    
         this.diss = []
         this.text = ""
         this.tokenize()
@@ -236,7 +237,7 @@ class Ansi
                     return space = ''
                 }
             }).bind(this)
-            for (i = 0; i < t.length; i++)
+            for (var _170_21_ = i = 0, _170_25_ = t.length; (_170_21_ <= _170_25_ ? i < t.length : i > t.length); (_170_21_ <= _170_25_ ? ++i : --i))
             {
                 if (t[i] !== ' ')
                 {
