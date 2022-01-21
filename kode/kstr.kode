@@ -86,6 +86,10 @@ str.lcnt = (s, c) ->
     i = -1
     while s[++i] in c then
     i    
+
+str.cnt = (s, c) ->
+    m = s.match(new RegExp(c, 'g'))
+    m? ? m.length : 0
     
 # 00000000    0000000   0000000    
 # 000   000  000   000  000   000  

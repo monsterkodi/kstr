@@ -1,6 +1,6 @@
-// monsterkodi/kode 0.206.0
+// monsterkodi/kode 0.237.0
 
-var _k_ = {in: function (a,l) {return (typeof l === 'string' && typeof a === 'string' && a.length ? '' : []).indexOf.call(l,a) >= 0}, list: function (l) {return (l != null ? typeof l.length === 'number' ? l : [] : [])}}
+var _k_ = {in: function (a,l) {return (typeof l === 'string' && typeof a === 'string' && a.length ? '' : []).indexOf.call(l,a) >= 0}, list: function (l) {return l != null ? typeof l.length === 'number' ? l : [] : []}}
 
 var ESCAPEREGEXP, str, STRIPANSI
 
@@ -107,6 +107,14 @@ str.lcnt = function (s, c)
     return i
 }
 
+str.cnt = function (s, c)
+{
+    var m
+
+    m = s.match(new RegExp(c,'g'))
+    return ((m != null) ? m.length : 0)
+}
+
 str.lpad = function (s, l, c = ' ')
 {
     s = String(s)
@@ -155,9 +163,9 @@ str.time = function (t)
             f = 1
             o = {ms:1000,second:60,minute:60,hour:24,day:30,month:12,year:0}
             var list = _k_.list(Object.keys(o))
-            for (var _134_18_ = 0; _134_18_ < list.length; _134_18_++)
+            for (var _138_18_ = 0; _138_18_ < list.length; _138_18_++)
             {
-                k = list[_134_18_]
+                k = list[_138_18_]
                 num = parseInt(t / f)
                 f *= o[k]
                 if (k === 'year' || t < f)
@@ -174,9 +182,9 @@ str.time = function (t)
             thsnd = BigInt(1000)
             f = thsnd
             var list1 = ['ns','μs','ms','second']
-            for (var _143_18_ = 0; _143_18_ < list1.length; _143_18_++)
+            for (var _147_18_ = 0; _147_18_ < list1.length; _147_18_++)
             {
-                k = list1[_143_18_]
+                k = list1[_147_18_]
                 if (k === 'seconds' || t < f)
                 {
                     num = parseInt(thsnd * t / f)
@@ -206,7 +214,7 @@ STRIPANSI = /\x1B[[(?);]{0,2}(;?\d)*./g
 
 str.stripAnsi = function (s)
 {
-    var _171_13_
+    var _175_13_
 
     return (typeof s.replace === "function" ? s.replace(STRIPANSI,'') : undefined)
 }
