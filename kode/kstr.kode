@@ -93,7 +93,7 @@ str.rcnt = (s, c) ->
     return 0 if typeof s != 'string'
     c ?= ''
     i = -1
-    while s[s.length+(++i)] in c then
+    while s[s.length-(++i)-1] in c then
     i    
     
 str.cnt = (s, c) ->

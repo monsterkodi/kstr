@@ -122,7 +122,7 @@ str.rcnt = function (s, c)
     }
     c = (c != null ? c : '')
     i = -1
-    while (_k_.in(s[s.length + (++i)],c))
+    while (_k_.in(s[s.length - (++i) - 1],c))
     {
     }
     return i

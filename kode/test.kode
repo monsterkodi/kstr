@@ -104,10 +104,11 @@ k = require('klor').kolor
         kstr.rcnt('abc' ['ab''b'])       ▸ 0
         kstr.rcnt('abc' ['c''b'])        ▸ 2
         kstr.rcnt(s, 'ac')               ▸ 1
-        kstr.rcnt(n, '23')               ▸ 1
+        kstr.rcnt(n, '23')               ▸ 2
         kstr.rcnt(11202, '02')           ▸ 3
         kstr.rcnt('xx   ' ' ')           ▸ 3
         kstr.rcnt('12345 blub' 'blub')   ▸ 4
+        kstr.rcnt('A4──A5  ' ' ')        ▸ 2
         
     # 00000000    0000000   0000000    
     # 000   000  000   000  000   000  
