@@ -87,6 +87,15 @@ str.lcnt = (s, c) ->
     while s[++i] in c then
     i    
 
+str.rcnt = (s, c) ->
+    s ?= ''
+    if typeof s == 'number' and Number.isFinite s then s = String s
+    return 0 if typeof s != 'string'
+    c ?= ''
+    i = -1
+    while s[s.length+(++i)] in c then
+    i    
+    
 str.cnt = (s, c) ->
     m = s.match(new RegExp(c, 'g'))
     m? ? m.length : 0

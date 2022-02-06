@@ -84,7 +84,31 @@ k = require('klor').kolor
         kstr.lcnt(11202, '12')           ▸ 3
         kstr.lcnt('   xx' ' ')           ▸ 3
         kstr.lcnt('12345 blub' '1234')   ▸ 4
-    
+
+    ▸ rcnt
+        s = 'abc'
+        n = 123
+        kstr.rcnt()                      ▸ 0
+        kstr.rcnt(null, 'n')             ▸ 0
+        kstr.rcnt(undefined, 'u')        ▸ 0
+        kstr.rcnt(Infinity, 'Inf')       ▸ 0
+        kstr.rcnt({}, '{')               ▸ 0
+        kstr.rcnt([], '[')               ▸ 0
+        kstr.rcnt('' 1)                  ▸ 0
+        kstr.rcnt('ax' '')               ▸ 0
+        kstr.rcnt('' 'xy')               ▸ 0
+        kstr.rcnt('abc', Infinity)       ▸ 0
+        kstr.rcnt('abc' null)            ▸ 0
+        kstr.rcnt('abc' undefined)       ▸ 0
+        kstr.rcnt('abc' {})              ▸ 0
+        kstr.rcnt('abc' ['ab''b'])       ▸ 0
+        kstr.rcnt('abc' ['c''b'])        ▸ 2
+        kstr.rcnt(s, 'ac')               ▸ 1
+        kstr.rcnt(n, '23')               ▸ 1
+        kstr.rcnt(11202, '02')           ▸ 3
+        kstr.rcnt('xx   ' ' ')           ▸ 3
+        kstr.rcnt('12345 blub' 'blub')   ▸ 4
+        
     # 00000000    0000000   0000000    
     # 000   000  000   000  000   000  
     # 00000000   000000000  000   000  

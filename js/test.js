@@ -1,4 +1,4 @@
-// monsterkodi/kode 0.206.0
+// monsterkodi/kode 0.237.0
 
 var _k_
 
@@ -75,6 +75,31 @@ module.exports["kstr"] = function ()
         compare(kstr.lcnt(11202,'12'),3)
         compare(kstr.lcnt('   xx',' '),3)
         compare(kstr.lcnt('12345 blub','1234'),4)
+    })
+    section("rcnt", function ()
+    {
+        s = 'abc'
+        n = 123
+        compare(kstr.rcnt(),0)
+        compare(kstr.rcnt(null,'n'),0)
+        compare(kstr.rcnt(undefined,'u'),0)
+        compare(kstr.rcnt(Infinity,'Inf'),0)
+        compare(kstr.rcnt({},'{'),0)
+        compare(kstr.rcnt([],'['),0)
+        compare(kstr.rcnt('',1),0)
+        compare(kstr.rcnt('ax',''),0)
+        compare(kstr.rcnt('','xy'),0)
+        compare(kstr.rcnt('abc',Infinity),0)
+        compare(kstr.rcnt('abc',null),0)
+        compare(kstr.rcnt('abc',undefined),0)
+        compare(kstr.rcnt('abc',{}),0)
+        compare(kstr.rcnt('abc',['ab','b']),0)
+        compare(kstr.rcnt('abc',['c','b']),2)
+        compare(kstr.rcnt(s,'ac'),1)
+        compare(kstr.rcnt(n,'23'),1)
+        compare(kstr.rcnt(11202,'02'),3)
+        compare(kstr.rcnt('xx   ',' '),3)
+        compare(kstr.rcnt('12345 blub','blub'),4)
     })
     section("lpad", function ()
     {

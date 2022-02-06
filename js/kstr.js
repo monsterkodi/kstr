@@ -107,6 +107,27 @@ str.lcnt = function (s, c)
     return i
 }
 
+str.rcnt = function (s, c)
+{
+    var i
+
+    s = (s != null ? s : '')
+    if (typeof(s) === 'number' && Number.isFinite(s))
+    {
+        s = String(s)
+    }
+    if (typeof(s) !== 'string')
+    {
+        return 0
+    }
+    c = (c != null ? c : '')
+    i = -1
+    while (_k_.in(s[s.length + (++i)],c))
+    {
+    }
+    return i
+}
+
 str.cnt = function (s, c)
 {
     var m
@@ -163,9 +184,9 @@ str.time = function (t)
             f = 1
             o = {ms:1000,second:60,minute:60,hour:24,day:30,month:12,year:0}
             var list = _k_.list(Object.keys(o))
-            for (var _138_18_ = 0; _138_18_ < list.length; _138_18_++)
+            for (var _147_18_ = 0; _147_18_ < list.length; _147_18_++)
             {
-                k = list[_138_18_]
+                k = list[_147_18_]
                 num = parseInt(t / f)
                 f *= o[k]
                 if (k === 'year' || t < f)
@@ -182,9 +203,9 @@ str.time = function (t)
             thsnd = BigInt(1000)
             f = thsnd
             var list1 = ['ns','μs','ms','second']
-            for (var _147_18_ = 0; _147_18_ < list1.length; _147_18_++)
+            for (var _156_18_ = 0; _156_18_ < list1.length; _156_18_++)
             {
-                k = list1[_147_18_]
+                k = list1[_156_18_]
                 if (k === 'seconds' || t < f)
                 {
                     num = parseInt(thsnd * t / f)
@@ -214,7 +235,7 @@ STRIPANSI = /\x1B[[(?);]{0,2}(;?\d)*./g
 
 str.stripAnsi = function (s)
 {
-    var _175_13_
+    var _184_13_
 
     return (typeof s.replace === "function" ? s.replace(STRIPANSI,'') : undefined)
 }
