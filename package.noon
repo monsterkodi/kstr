@@ -1,5 +1,5 @@
 name            kstr
-version         0.22.0
+version         0.22.1
 description     string utilities
 main            js/kstr.js
 files
@@ -16,7 +16,7 @@ author          monsterkodi
 license         Unlicense
 repository      github:monsterkodi/kstr
 dependencies
-                noon            monsterkodi/noon
+                noon            github:monsterkodi/noon
                 html-entities   ^2.3.2
 devDependencies
-                kode  monsterkodi/kode
+                kode  github:monsterkodi/kode
