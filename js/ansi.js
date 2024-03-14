@@ -1,4 +1,6 @@
-var _k_ = {each_r: function (o) {return o instanceof Array ? [] : typeof o == 'string' ? o.split('') : {}}, in: function (a,l) {return (typeof l === 'string' && typeof a === 'string' && a.length ? '' : []).indexOf.call(l,a) >= 0}, list: function (l) {return (l != null ? typeof l.length === 'number' ? l : [] : [])}}
+// monsterkodi/kode 0.249.0
+
+var _k_ = {each_r: function (o) {return Array.isArray(o) ? [] : typeof o == 'string' ? o.split('') : {}}, in: function (a,l) {return (typeof l === 'string' && typeof a === 'string' && a.length ? '' : []).indexOf.call(l,a) >= 0}, list: function (l) {return l != null ? typeof l.length === 'number' ? l : [] : []}}
 
 var STYLES, toHexString
 
@@ -14,19 +16,19 @@ toHexString = function (num)
     return num
 }
 ;(function (o) {
-    var r = _k_.each_r(o)
+    var r_50_7_ = _k_.each_r(o)
     for (var k in o)
     {   
         var m = (function (red)
     {
         return         (function (o) {
-            var r = _k_.each_r(o)
+            var r_51_11_ = _k_.each_r(o)
             for (var k in o)
             {   
                 var m = (function (green)
             {
                 return                 (function (o) {
-                    var r = _k_.each_r(o)
+                    var r_52_15_ = _k_.each_r(o)
                     for (var k in o)
                     {   
                         var m = (function (blue)
@@ -37,35 +39,35 @@ toHexString = function (num)
                         r = red > 0 ? red * 40 + 55 : 0
                         g = green > 0 ? green * 40 + 55 : 0
                         b = blue > 0 ? blue * 40 + 55 : 0
-                        rgb = (function () { var result = []; var list = [r,g,b]; for (var _57_40_ = 0; _57_40_ < list.length; _57_40_++)  { n = list[_57_40_];result.push(toHexString(n))  } return result }).bind(this)().join('')
+                        rgb = (function () { var r_57_40_ = []; var list = [r,g,b]; for (var _57_40_ = 0; _57_40_ < list.length; _57_40_++)  { n = list[_57_40_];r_57_40_.push(toHexString(n))  } return r_57_40_ }).bind(this)().join('')
                         STYLES[`f${c}`] = `#${rgb}`
                         return STYLES[`b${c}`] = `#${rgb}`
                     })(o[k])
                         if (m != null)
                         {
-                            r[k] = m
+                            r_52_15_[k] = m
                         }
                     }
-                    return typeof o == 'string' ? r.join('') : r
+                    return typeof o == 'string' ? r_52_15_.join('') : r_52_15_
                 })([0,1,2,3,4,5])
             })(o[k])
                 if (m != null)
                 {
-                    r[k] = m
+                    r_51_11_[k] = m
                 }
             }
-            return typeof o == 'string' ? r.join('') : r
+            return typeof o == 'string' ? r_51_11_.join('') : r_51_11_
         })([0,1,2,3,4,5])
     })(o[k])
         if (m != null)
         {
-            r[k] = m
+            r_50_7_[k] = m
         }
     }
-    return typeof o == 'string' ? r.join('') : r
+    return typeof o == 'string' ? r_50_7_.join('') : r_50_7_
 })([0,1,2,3,4,5])
 ;(function (o) {
-    var r = _k_.each_r(o)
+    var r_61_8_ = _k_.each_r(o)
     for (var k in o)
     {   
         var m = (function (gray)
@@ -79,10 +81,10 @@ toHexString = function (num)
     })(o[k])
         if (m != null)
         {
-            r[k] = m
+            r_61_8_[k] = m
         }
     }
-    return typeof o == 'string' ? r.join('') : r
+    return typeof o == 'string' ? r_61_8_.join('') : r_61_8_
 })((function() { var r = []; for (var i = 0; i <= 23; i++){ r.push(i); } return r; }).apply(this))
 class Ansi
 {
